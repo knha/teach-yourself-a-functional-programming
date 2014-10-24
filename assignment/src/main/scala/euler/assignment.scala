@@ -12,7 +12,21 @@ object ProjectEuler {
    * By considering the terms in the Fibonacci sequence whose values do not
    * exceed four million, find the sum of the even-valued terms.
    */
-  def problem2(): Int = ???
+   def problem2(): Int = {
+    
+     var list = scala.collection.mutable.ListBuffer[Int]()
+      def fib(num: Int, nextNum: Int): Int = {
+       val next = num + nextNum
+       println(next)
+        if (next % 2 == 0 && next < 4000000)
+          list += next
+       //println(list) for checking
+       if (next < 4000000) fib(nextNum, next) else next
+       //println(list.sum) for checking
+      }
+      fib(0, 1)
+		list.sum
+  }
 
   /*
    * Largest palindrome product
@@ -23,7 +37,31 @@ object ProjectEuler {
    * Find the largest palindrome made from the product of two 3-digit numbers.
    *
    */
-  def problem4(): Int = ???
+  def problem4(): Int =  def problem4(): Int = {
+      
+   val list = scala.collection.mutable.ListBuffer[Int]()
+	def palindrome(times: Int, x: Int, y: Int): Int = {
+	  val p = x * y
+	  if (times == 0) { if (p > 100000) palindrome(900, x - 1, 100); else p }; else {
+	  
+	  if (!checkPalindrome(p.toString)) {
+		  //println(p + "  x = " + x + ", y = " + y) // for checks
+		  	palindrome(times - 1, x, y + 1)
+	  		};
+	  		else {
+	  		  list += p
+	  		  //println("this is pal: "+ p + "  x = " + x + ", y = " + y) //  for checks
+	  		  palindrome(times - 1, x, y + 1) 
+	         }
+	     }
+	  }
+	
+	def checkPalindrome(c: String): Boolean = 	//Note to self... can't take Int to reverse it...
+	  c.reverse == c && c.length >= 2
+	
+	val pal = palindrome(900 ,999, 100)
+	list.max
+  }
 
   /*
    * Special Pythagorean triplet
